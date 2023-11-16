@@ -1,0 +1,28 @@
+{
+    "wicket_keepers": {
+        "min": 1,
+        "max": 4
+    },
+    "batsmens": {
+        "min": 3,
+        "max": 6
+    },
+    "all_rounders": {
+        "min": 1,
+        "max": 4
+    },
+    "bowlers": {
+        "min": 3,
+        "max": 6
+    },
+    "home_team_players": {
+        "min": 4,
+        "max": 7
+    },
+    "away_team_players": {
+        "min": 4,
+        "max": 7
+    },
+    "max_players": 11,
+    "max_credits": 100
+}

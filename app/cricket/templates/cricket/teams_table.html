@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Game | {{ config['SITE_NAME'] }} {% endblock %}
+
+{% block head %}
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<main>
+    <section class="fill-view-80 mb-5">
+        <div class="container">
+        </div class="row">
+        <div class="col-12 col-md-6 mb-5 d-flex justify-content-center">
+            <div id="table" class="table"></div>
+        </div>
+        </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+<script>
+    const updateUrl = (prev, query) => {
+        return prev + (prev.indexOf('?') >= 0 ? '&' : '?') + new URLSearchParams(query).toString();
+    };
+
+    new gridjs.Grid({
+        columns: [
+            // { id: 'players', name: 'Squad' },
+            { id: 'player1', name: 'player1' },
+            { id: 'player2', name: 'player2' },
+            { id: 'player3', name: 'player3' },
+            { id: 'player4', name: 'player4' },
+            { id: 'player5', name: 'player5' },
+            { id: 'player6', name: 'player6' },
+            { id: 'player7', name: 'player7' },
+            { id: 'player8', name: 'player8' },
+            { id: 'player9', name: 'player9' },
+            { id: 'player10', name: 'player10' },
+            { id: 'player11', name: 'player11' },
+            { id: 'credits', name: 'Credits' },
+        ],
+        server: {
+            url: '/game/data',
+            then: results => results.data,
+            total: results => results.total,
+        },
+        search: {
+            enabled: true,
+            server: {
+                url: (prev, search) => {
+                    return updateUrl(prev, { search });
+                },
+            },
+        },
+        sort: {
+            enabled: true,
+            multiColumn: true,
+            server: {
+                url: (prev, columns) => {
+                    const columnIds = ['credits'];
+                    const sort = columns.map(col => (col.direction === 1 ? '+' : '-') + columnIds[col.index]);
+                    return updateUrl(prev, { sort });
+                },
+            },
+        },
+        pagination: {
+            enabled: true,
+            server: {
+                url: (prev, page, limit) => {
+                    return updateUrl(prev, { start: page * limit, length: limit });
+                },
+            },
+        },
+    }).render(document.getElementById('table'));
+</script>
+{% endblock %}

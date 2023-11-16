@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %} Sign in | {{config['SITE_NAME']}} {% endblock %}
+{% block page_content %}
+<main class="min-vh-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4 mb-5">
+        <form method="POST" action="{{ url_for('auth.login') }}">
+          {{ form.hidden_tag() }}
+          <div class="form-group p-2 p-sm-3 p-md-4 border rounded-3">
+            <div class="text-center fs-3 mb-4">
+              Sign in
+            </div>
+            <div class="mb-3">
+              {{ form.email.label(for="formEmailField", class="form-label text-muted") }}
+              {% if form.email.errors %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {{ form.password.label(class="form-label text-muted", for="formPasswordField") }}
+              {% if form.password.errors %}
+              {{ form.password(type="password", id="formPasswordField", class="form-control form-primary
+              is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.password(type="password", id="formPasswordField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="form-check mb-5">
+              {{ form.remember(type="checkbox", id="formCheckField", class="form-check-input check-input-primary")
+              }}
+              {{ form.remember.label(for="formCheckField", class="form-check-label") }}
+            </div>
+            <div class="text-center mb-5">
+              {{ form.submit(class="btn btn-outline-dark button-primary px-5") }}
+            </div>
+            <div class="text-center">
+              <p>
+                <a class="anchor-primary text-decoration-none" href="{{ url_for('auth.request_password') }}">
+                  Forgot password?
+                </a>
+              </p>
+              <span>
+                Don't have an account?
+                <a class="anchor-primary text-decoration-none" href="{{ url_for('auth.register') }}">
+                  Sign up
+                </a>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block title %} Sign up | {{config['SITE_NAME']}} {% endblock %}
+{% block page_content %}
+<main class="min-vh-100 mb-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4 mb-5">
+        <form method="POST" action="{{ url_for('auth.register') }}">
+          {{ form.hidden_tag() }}
+          <div class="form-group p-2 p-sm-3 p-md-4 border rounded-3">
+            <div class="text-center fs-3 mb-4">
+              Sign up
+            </div>
+            <div class="mb-3">
+              {{ form.name.label(for="formNameField", class="form-label text-muted") }}
+              {% if form.name.errors %}
+              {{ form.name(type="text", id="formNameField", class="form-control form-primary is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.name(type="text", id="formNameField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {{ form.email.label(for="formEmailField", class="form-label text-muted") }}
+              {% if form.email.errors %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {{ form.password.label(class="form-label text-muted", for="formPasswordField") }}
+              {% if form.password.errors %}
+              {{ form.password(type="password", id="formPasswordField", class="form-control form-primary is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.password(type="password", id="formPasswordField", class="form-control form-primary") }}
+              <!-- <div id="formPasswordField" class="form-text">
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                spaces, special characters, or emoji.
+              </div> -->
+              {% endif %}
+            </div>
+            <div class="mb-5">
+              {{ form.confirm_password.label(class="form-label text-muted", for="formConfirmPasswordField") }}
+              {% if form.confirm_password.errors %}
+              {{ form.confirm_password(type="password", id="formConfirmPasswordField", class="form-control
+              form-primary
+              is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.confirm_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.confirm_password(type="password", id="formConfirmPasswordField", class="form-control
+              form-primary") }}
+              {% endif %}
+            </div>
+            <div class="text-center mb-5">
+              {{ form.submit(class="btn btn-outline-dark button-primary px-5") }}
+            </div>
+            <div class="text-center">
+              <span>
+                Already have an account?
+                <a class="anchor-primary text-decoration-none" href="{{ url_for('auth.login') }}">
+                  Sign in
+                </a>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

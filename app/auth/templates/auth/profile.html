@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block title %} Profile | {{config['SITE_NAME']}} {% endblock %}
+{% block page_content %}
+<main class="min-vh-100 mb-3">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 mb-5">
+        <form method="POST" action="{{ url_for('auth.profile') }}">
+          {{ form.hidden_tag() }}
+          <div class="form-group p-2 p-sm-3 p-md-4 border rounded-3">
+            <div class="text-center fs-3 mb-4">
+              Profile
+            </div>
+            <div class="mb-3">
+              {{ form.name.label(for="formNameField", class="form-label text-muted") }}
+              {% if form.name.errors %}
+              {{ form.name(type="text", id="formNameField", class="form-control form-primary is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.name(type="text", id="formNameField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {{ form.email.label(for="formEmailField", class="form-label text-muted") }}
+              {% if form.email.errors %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(type="email", id="formEmailField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {{ form.new_password.label(class="form-label text-muted", for="formPasswordField") }}
+              {% if form.new_password.errors %}
+              {{ form.new_password(type="password", id="formPasswordField", class="form-control form-primary
+              is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.new_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.new_password(type="password", id="formPasswordField", class="form-control form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-5">
+              {{ form.confirm_password.label(class="form-label text-muted", for="formConfirmPasswordField") }}
+              {% if form.confirm_password.errors %}
+              {{ form.confirm_password(type="password", id="formConfirmPasswordField", class="form-control
+              form-primary
+              is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.confirm_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.confirm_password(type="password", id="formConfirmPasswordField", class="form-control
+              form-primary") }}
+              {% endif %}
+            </div>
+            <div class="mb-5">
+              {{ form.current_password.label(class="form-label text-muted", for="formCurrentPasswordField") }}
+              {% if form.current_password.errors %}
+              {{ form.current_password(type="password", id="formCurrentPasswordField", class="form-control
+              form-primary
+              is-invalid")
+              }}
+              <div class="invalid-feedback">
+                {% for error in form.current_password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.current_password(type="password", id="formCurrentPasswordField", class="form-control
+              form-primary") }}
+              {% endif %}
+            </div>
+            <div class="text-center mb-5">
+              {{ form.submit(class="btn btn-outline-dark button-primary px-5") }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

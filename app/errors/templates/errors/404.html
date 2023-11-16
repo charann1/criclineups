@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %} Error 404 | {{config['SITE_NAME']}} {% endblock %}
+
+{% block page_content %}
+
+<main>
+  <section class="fill-view-80 d-flex align-items-center section-image overlay-soft-dark"
+    data-background="/static/assets/img/pages/form-image.jpg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <div
+            class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
+            <div class="text-center text-md-center mb-4 mt-md-0">
+              <h1 class="display-1 mb-0 font-bold primary-color">
+                Error 404
+              </h1>
+              <br />
+              <p class="fs-1">
+                Page not found
+              </p>
+              <br />
+              <a class="lead text-muted" href="{{ url_for('pages.home') }}">Go back home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
